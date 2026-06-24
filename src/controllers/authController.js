@@ -97,3 +97,26 @@ const getUserProfile = async (req, res) => {
 // @desc    Set or Change 4-digit MPIN
 // @route   POST /api/auth/setup-mpin
 // @access  Private
+
+const setupMpin = async (req, res) => {
+  try {
+    const { mpin } = req.body; // Expecting a 4 or 6 digit string
+
+    if (!mpin || mpin.length < 4) {
+      return res.status(400).json({ message: 'Please provide a valid MPIN (at least 4 digits)' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedMpin = await bcrypt.hash(mpin.toString(), salt);
+
+    const user = await User.findById(req.user._id);
+    user.mpin = hashedMpin;
+    await user.save();
+
+    res.json({ message: 'MPIN setup successfully!' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { registerUser, loginUser, getUserProfile, setupMpin };
