@@ -78,3 +78,22 @@ const loginUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select('-password -mpin');
+    if (user) {
+      const responseUser = user.toObject();
+      responseUser.hasMpinSet = !!req.user.mpin; 
+      res.json(responseUser);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Set or Change 4-digit MPIN
+// @route   POST /api/auth/setup-mpin
+// @access  Private
