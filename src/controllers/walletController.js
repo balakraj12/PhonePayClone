@@ -33,6 +33,3 @@ const addMoney = async (req, res) => {
   }
 };
 
-// @desc    Pay Utility Bills (Recharge, Electricity)
-// @route   POST /api/wallet/pay-bill
-// @access  Private
