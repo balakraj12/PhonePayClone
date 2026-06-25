@@ -18,3 +18,21 @@ const addMoney = async (req, res) => {
      const user = await User.findById(userId);
     user.balance += amount;
     await user.save();
+
+     // Log addition transaction
+    const transaction = await Transaction.create({
+      sender: userId,
+      type: 'ADD_MONEY',
+      amount,
+      status: 'SUCCESS',
+    });
+
+    res.json({ message: `Successfully added ${amount} to wallet`, balance: user.balance, transaction });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Pay Utility Bills (Recharge, Electricity)
+// @route   POST /api/wallet/pay-bill
+// @access  Private
