@@ -45,3 +45,14 @@ const payBill = async (req, res) => {
     if (!mpin) {
         return res.status(400).json({ message: 'MPIN is required' });
     }
+
+    const user = await User.findById(userId);
+
+    // Verify MPIN
+    if (!user.mpin) return res.status(400).json({ message: 'Please setup MPIN first' });
+    const isMpinCorrect = await bcrypt.compare(mpin.toString(), user.mpin);
+    if (!isMpinCorrect) return res.status(401).json({ message: 'Incorrect MPIN' });
+
+    if (user.balance < amount) {
+      return res.status(400).json({ message: 'Insufficient wallet balance' });
+    }
