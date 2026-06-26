@@ -68,3 +68,11 @@ const payBill = async (req, res) => {
       amount,
       status: 'SUCCESS',
     });
+
+      res.json({ message: `Bill paid successfully for ${billerName}`, balance: user.balance, transaction });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { addMoney, payBill };
