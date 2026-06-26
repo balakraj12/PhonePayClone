@@ -33,3 +33,15 @@ const addMoney = async (req, res) => {
   }
 };
 
+// @desc    Pay Utility Bills (Recharge, Electricity)
+// @route   POST /api/wallet/pay-bill
+// @access  Private
+
+const payBill = async (req, res) => {
+  try {
+    const { billerName, amount, mpin } = req.body;
+    const userId = req.user._id;
+
+    if (!mpin) {
+        return res.status(400).json({ message: 'MPIN is required' });
+    }
