@@ -12,3 +12,5 @@ const protect = async (req, res, next) => {
     try {
       // Get token from header (Format is "Bearer <token>")
       token = req.headers.authorization.split(' ')[1];
+// Decode the token and get user ID
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
