@@ -76,3 +76,10 @@ const sendMoney = async (req, res) => {
 const getTransactionHistory = async (req, res) => {
   try {
     const userId = req.user._id;
+
+   const transactions = await Transaction.find({
+      $or: [{ sender: userId }, { receiver: userId }],
+    })
+      .populate('sender', 'name phone upiId')
+      .populate('receiver', 'name phone upiId')
+      .sort({ createdAt: -1 });
