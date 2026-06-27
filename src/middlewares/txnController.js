@@ -38,3 +38,7 @@ const sendMoney = async (req, res) => {
      if (!receiver) {
       return res.status(404).json({ message: 'Receiver not found (Invalid Phone/UPI)' });
     }
+
+    if (senderId.toString() === receiver._id.toString()) {
+      return res.status(400).json({ message: 'You cannot send money to yourself' });
+    }
