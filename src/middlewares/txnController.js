@@ -53,3 +53,12 @@ const sendMoney = async (req, res) => {
 
     await sender.save();
     await receiver.save();
+
+     // Log the transaction
+    const transaction = await Transaction.create({
+      sender: senderId,
+      receiver: receiver._id,
+      type: 'TRANSFER',
+      amount,
+      status: 'SUCCESS',
+    });
