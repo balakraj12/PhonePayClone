@@ -46,3 +46,10 @@ const sendMoney = async (req, res) => {
      if (sender.balance < amount) {
       return res.status(400).json({ message: 'Insufficient balance' });
     }
+
+    // Transfer Logic
+    sender.balance -= amount;
+    receiver.balance += amount;
+
+    await sender.save();
+    await receiver.save();
