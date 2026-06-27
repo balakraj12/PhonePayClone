@@ -29,3 +29,8 @@ const sendMoney = async (req, res) => {
     if (!isMpinCorrect) {
       return res.status(401).json({ message: 'Incorrect MPIN' });
     }
+
+    // Find the receiver either by Phone or UPI ID
+    const receiver = await User.findOne({
+      $or: [{ phone: receiverIdentifier }, { upiId: receiverIdentifier }]
+    });
