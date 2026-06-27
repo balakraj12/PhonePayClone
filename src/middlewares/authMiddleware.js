@@ -12,7 +12,7 @@ const protect = async (req, res, next) => {
     try {
       // Get token from header (Format is "Bearer <token>")
       token = req.headers.authorization.split(' ')[1];
-// Decode the token and get user ID
+     // Decode the token and get user ID
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
        // Find user in database, exclude password
@@ -24,10 +24,6 @@ const protect = async (req, res, next) => {
     }
   }
 
-   } catch (error) {
-      res.status(401).json({ message: 'Not authorized, token failed' });
-    }
-  }
 
   if (!token) {
     res.status(401).json({ message: 'Not authorized, no token' });
