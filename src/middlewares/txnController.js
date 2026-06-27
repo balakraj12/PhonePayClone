@@ -83,3 +83,11 @@ const getTransactionHistory = async (req, res) => {
       .populate('sender', 'name phone upiId')
       .populate('receiver', 'name phone upiId')
       .sort({ createdAt: -1 });
+
+      res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { sendMoney, getTransactionHistory };
