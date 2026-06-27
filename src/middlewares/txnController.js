@@ -34,3 +34,7 @@ const sendMoney = async (req, res) => {
     const receiver = await User.findOne({
       $or: [{ phone: receiverIdentifier }, { upiId: receiverIdentifier }]
     });
+
+     if (!receiver) {
+      return res.status(404).json({ message: 'Receiver not found (Invalid Phone/UPI)' });
+    }
