@@ -72,3 +72,7 @@ const sendMoney = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const getTransactionHistory = async (req, res) => {
+  try {
+    const userId = req.user._id;
