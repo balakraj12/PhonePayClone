@@ -42,3 +42,7 @@ const sendMoney = async (req, res) => {
     if (senderId.toString() === receiver._id.toString()) {
       return res.status(400).json({ message: 'You cannot send money to yourself' });
     }
+
+     if (sender.balance < amount) {
+      return res.status(400).json({ message: 'Insufficient balance' });
+    }
