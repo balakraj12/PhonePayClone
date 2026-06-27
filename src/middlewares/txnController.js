@@ -18,3 +18,14 @@ const sendMoney = async (req, res) => {
     if (amount <= 0) {
       return res.status(400).json({ message: 'Amount must be greater than zero' });
     }
+
+    const sender = await User.findById(senderId);
+
+    // Verify MPIN
+    if (!sender.mpin) {
+      return res.status(400).json({ message: 'Please setup your MPIN first' });
+    }
+    const isMpinCorrect = await bcrypt.compare(mpin.toString(), sender.mpin);
+    if (!isMpinCorrect) {
+      return res.status(401).json({ message: 'Incorrect MPIN' });
+    }
