@@ -62,3 +62,13 @@ const sendMoney = async (req, res) => {
       amount,
       status: 'SUCCESS',
     });
+
+     res.status(201).json({
+      message: 'Money Transfer Successful',
+      transaction,
+      newBalance: sender.balance,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
