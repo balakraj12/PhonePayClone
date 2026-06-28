@@ -14,3 +14,7 @@ const addMoney = async (req, res) => {
      if (amount <= 0) {
       return res.status(400).json({ message: 'Amount should be valid' });
     }
+
+     const user = await User.findById(userId);
+    user.balance += amount;
+    await user.save();
