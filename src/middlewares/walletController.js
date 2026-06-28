@@ -10,3 +10,7 @@ const addMoney = async (req, res) => {
   try {
     const { amount } = req.body;
     const userId = req.user._id;
+
+     if (amount <= 0) {
+      return res.status(400).json({ message: 'Amount should be valid' });
+    }
