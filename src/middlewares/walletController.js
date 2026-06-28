@@ -26,3 +26,9 @@ const addMoney = async (req, res) => {
       amount,
       status: 'SUCCESS',
     });
+
+     res.json({ message: `Successfully added ${amount} to wallet`, balance: user.balance, transaction });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
