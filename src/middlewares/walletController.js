@@ -18,3 +18,11 @@ const addMoney = async (req, res) => {
      const user = await User.findById(userId);
     user.balance += amount;
     await user.save();
+
+    // Log addition transaction
+    const transaction = await Transaction.create({
+      sender: userId,
+      type: 'ADD_MONEY',
+      amount,
+      status: 'SUCCESS',
+    });
