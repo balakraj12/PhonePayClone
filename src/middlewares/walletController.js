@@ -32,3 +32,11 @@ const addMoney = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// @desc    Pay Utility Bills (Recharge, Electricity)
+// @route   POST /api/wallet/pay-bill
+// @access  Private
+const payBill = async (req, res) => {
+  try {
+    const { billerName, amount, mpin } = req.body;
+    const userId = req.user._id;
