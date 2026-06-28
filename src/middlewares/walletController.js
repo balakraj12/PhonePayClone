@@ -55,3 +55,7 @@ const payBill = async (req, res) => {
     if (user.balance < amount) {
       return res.status(400).json({ message: 'Insufficient wallet balance' });
     }
+
+     // Deduct Balance
+    user.balance -= amount;
+    await user.save();
