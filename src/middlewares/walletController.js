@@ -59,3 +59,11 @@ const payBill = async (req, res) => {
      // Deduct Balance
     user.balance -= amount;
     await user.save();
+
+       const transaction = await Transaction.create({
+      sender: userId,
+      type: 'BILL_PAY',
+      billerName: billerName || 'Unknown Utility',
+      amount,
+      status: 'SUCCESS',
+    });
