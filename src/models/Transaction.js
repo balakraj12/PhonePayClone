@@ -18,3 +18,7 @@ const transactionSchema = new mongoose.Schema(
       enum: ['TRANSFER', 'ADD_MONEY', 'WITHDRAW', 'BILL_PAY'],
       default: 'TRANSFER',
     },
+
+     billerName: {
+      type: String, // e.g. "Jio Mobile Recharge" or "Adani Electricity"
+    },
