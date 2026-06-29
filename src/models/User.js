@@ -30,3 +30,16 @@ const userSchema = new mongoose.Schema(
     mpin: {
       type: String, // Stored as a hash
     },
+
+     balance: {
+      type: Number,
+      default: 1000, 
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;
