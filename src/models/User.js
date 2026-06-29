@@ -20,3 +20,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
+     // New Feature: User gets a UPI ID on signup
+    upiId: {
+      type: String,
+      unique: true,
+    },
