@@ -26,3 +26,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: true,
     },
+     // New Feature: MPIN for transactions
+    mpin: {
+      type: String, // Stored as a hash
+    },
