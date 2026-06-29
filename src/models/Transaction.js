@@ -12,3 +12,9 @@ const transactionSchema = new mongoose.Schema(
       ref: 'User',
       // Optional now because we might have BILL_PAY or WITHDRAW where receiver is not a user
     },
+     // New Feature: Keep track of transaction types
+    type: {
+      type: String,
+      enum: ['TRANSFER', 'ADD_MONEY', 'WITHDRAW', 'BILL_PAY'],
+      default: 'TRANSFER',
+    },
