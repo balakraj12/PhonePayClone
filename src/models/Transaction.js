@@ -22,3 +22,8 @@ const transactionSchema = new mongoose.Schema(
      billerName: {
       type: String, // e.g. "Jio Mobile Recharge" or "Adani Electricity"
     },
+
+     amount: {
+      type: Number,
+      required: true,
+    },
