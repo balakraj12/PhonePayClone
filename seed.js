@@ -26,3 +26,14 @@ const seedUsers = async () => {
       { name: 'Rahul Verma', email: 'rahul@example.com', phone: '9876543212', upiId: 'rahul789@phonepe', password, mpin, balance: 1500 },
       { name: 'Neha Gupta', email: 'neha@example.com', phone: '9876543213', upiId: 'neha012@phonepe', password, mpin, balance: 8000 },
     ];
+
+     await User.insertMany(usersToCreate);
+    console.log('Seed Users Imported Successfully!');
+    console.log('All Users have default password: password123 | default MPIN: 1234');
+    
+    process.exit();
+  } catch (error) {
+    console.error(`Error with Seeding: ${error.message}`);
+    process.exit(1);
+  }
+};
