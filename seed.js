@@ -37,3 +37,5 @@ const seedUsers = async () => {
     process.exit(1);
   }
 };
+
+seedUsers();
