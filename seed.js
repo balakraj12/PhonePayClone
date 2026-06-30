@@ -12,3 +12,7 @@ const seedUsers = async () => {
     await User.deleteMany();
     await Transaction.deleteMany();
     console.log('Existing users & transactions deleted.');
+
+     // Default password and mpin
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash('password123', salt);
