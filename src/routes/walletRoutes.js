@@ -1,0 +1,4 @@
+const express = require('express');
+const router = express.Router();
+const { addMoney, payBill } = require('../controllers/walletController');
+const { protect } = require('../middlewares/authMiddleware');
